@@ -20,6 +20,7 @@ results = []
 #Create fileName variable
 fileName = os.path.join("Resources", "budget_data.csv")
 
+#Calculate data on csv file
 with open(fileName, newline='') as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
     
@@ -34,6 +35,7 @@ with open(fileName, newline='') as csvfile:
             firstValue = int(row[1])
             isFirstRow = False
 
+        #Record values for rows after first row
         else:
             lastValue = int(row[1])
             monthChange = lastValue - prevMonth
@@ -55,26 +57,25 @@ with open(fileName, newline='') as csvfile:
     #Calculate average change
     averageChange = (lastValue - firstValue) / (monthCount - 1)
 
-    #Store text results on string list
-    results = [
-        f'Financial Analysis',
-        f'----------------------------',
-        f'Total Months: {monthCount}',
-        f'Total: ${netTotal}',
-        f'Average Change: ${round(averageChange, 2)}',
-        f'Greatest Increase in Profits: {increaseDate} (${increaseNum})',
-        f'Greatest Decrease in Profits: {decreaseDate} (${decreaseNum})'
-    ]
+#Store results on string list
+results = [
+    f'Financial Analysis',
+    f'----------------------------',
+    f'Total Months: {monthCount}',
+    f'Total: ${netTotal}',
+    f'Average Change: ${round(averageChange, 2)}',
+    f'Greatest Increase in Profits: {increaseDate} (${increaseNum})',
+    f'Greatest Decrease in Profits: {decreaseDate} (${decreaseNum})'
+]
 
-    #Print to terminal
-    for line in results:
-        print(line)
+#Print results to terminal
+for line in results:
+    print(line)
 
-    #Create text file
-    writeFile = open('results.txt', 'w')
+#Create text file
+writeFile = open('results.txt', 'w')
 
-    #Write to text file and close when done
-    for line in results:
-        writeFile.write(line + '\n')
-    
-    writeFile.close()
+#Write results to text file and close when complete
+for line in results:
+    writeFile.write(line + '\n')
+writeFile.close()
