@@ -5,13 +5,13 @@ import csv
 totalVotes = 0
 
 candidates = {
-    "Correy": [0, 0.0],
-    "Khan": [0, 0.0],
-    "Li": [0, 0.0],
-    "O'Tooley": [0, 0.0]
+    "Correy": [0, 0],
+    "Khan": [0, 0],
+    "Li": [0, 0],
+    "O'Tooley": [0, 0]
 }
 
-filename = os.path.join("Resources", "test_file.csv")
+filename = os.path.join("Resources", "election_data.csv")
 
 with open(filename, newline='') as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
