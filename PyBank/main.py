@@ -73,7 +73,7 @@ for line in results:
     print(line)
 
 #Create text file
-writeFile = open('results.txt', 'w')
+writeFile = open('Output/results.txt', 'w')
 
 #Write results to text file and close when complete
 for line in results:

@@ -2,16 +2,15 @@
 import os
 import csv
 
-candidate_khan = 0
-candidate_correy = 0
-candidate_li = 0
-candidate_otooley = 0
-
+#Initialize candidate totals with zero
+khan = 0
+correy = 0
+li = 0
+otooley = 0
 total_votes = 0
 
+#List to string with results
 results = []
-winner = 0
-winnerName = ''
 
 #Get file to read
 filename = os.path.join("Resources", "election_data.csv")
@@ -28,18 +27,29 @@ with open(filename, newline='') as csvfile:
         total_votes += 1
 
         if row[2] == "Khan":
-            candidate_khan += 1
+            khan += 1
 
         elif row[2] == "Correy":
-            candidate_correy += 1
+            correy += 1
 
         elif row[2] == "Li":
-            candidate_li += 1
+            li += 1
         
         elif row[2] == "O'Tooley":
-            candidate_otooley += 1
+            otooley += 1
 
+#Check for winner
+if khan > correy and khan > li and khan > otooley:
+    winner = "Khan"
 
+elif correy > khan and correy > li and correy > otooley:
+    winner = "Correy"
+
+elif li > khan and li > correy and li > otooley:
+    winner = "Li"
+
+else:
+    winner = "O'Tooley"
 
 #Create list with output
 results = [
@@ -47,14 +57,22 @@ results = [
     f"-------------------------",
     f"Total votes: {total_votes}",
     f"-------------------------",
-    f"Khan: {round((100 * candidate_khan / total_votes), 3)}% ({candidate_khan})",
-    f"Correy: {round((100 * candidate_correy / total_votes), 3)}% ({candidate_correy})",
-    f"Li: {round((100 * candidate_li / total_votes), 3)}% ({candidate_li})",
-    f"O'Tooley: {round((100 * candidate_otooley / total_votes), 3)}% ({candidate_otooley})",
+    f"Khan: {round((100 * khan / total_votes), 1)}% ({khan})",
+    f"Correy: {round((100 * correy / total_votes), 1)}% ({correy})",
+    f"Li: {round((100 * li / total_votes), 1)}% ({li})",
+    f"O'Tooley: {round((100 * otooley / total_votes), 1)}% ({otooley})",
     f"-------------------------",
-    f"Winner: "
+    f"Winner: {winner}"
 ]
 
 #Print results to terminal
 for line in results:
     print(line)
+
+#Create text file
+writeFile = open('Output/results.txt', 'w')
+
+#Write results to text file and close when complete
+for line in results:
+    writeFile.write(line + '\n')
+writeFile.close()
