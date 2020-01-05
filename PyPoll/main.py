@@ -1,4 +1,4 @@
-#Import things
+#Import modules
 import os
 import csv
 
@@ -9,10 +9,10 @@ li = 0
 otooley = 0
 total_votes = 0
 
-#List to string with results
+#List with results
 results = []
 
-#Get file to read
+#Create string with file name
 filename = os.path.join("Resources", "election_data.csv")
 
 #Start reading file
@@ -22,6 +22,7 @@ with open(filename, newline='') as csvfile:
     #Skip header
     next(csvfile)
 
+    #Iterate through rows, increment total_votes each run and add up candidates
     for row in csvreader:
 
         total_votes += 1
